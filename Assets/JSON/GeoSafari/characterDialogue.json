@@ -1,0 +1,37 @@
+{
+  "passages": [
+    {
+      "text": "This is some body text\n\n[[Next passage->Test passage Two]] ",
+      "links": [
+        {
+          "name": "Next passage",
+          "link": "Test passage Two",
+          "pid": "2"
+        }
+      ],
+      "name": "Test passage one",
+      "pid": "1",
+      "position": {
+        "x": "355",
+        "y": "103.5"
+      },
+      "tags": [
+        "Testing-a-tag"
+      ]
+    },
+    {
+      "text": "This is a second thingy",
+      "name": "Test passage Two",
+      "pid": "2",
+      "position": {
+        "x": "280",
+        "y": "240.5"
+      }
+    }
+  ],
+  "name": "GeoGuesser",
+  "startnode": "1",
+  "creator": "Twine",
+  "creator-version": "2.2.1",
+  "ifid": "5F75E268-7D4C-427D-B6DC-F8F6E6FBB36A"
+}

@@ -1,0 +1,14 @@
+{
+    "greetings":
+    [
+      {
+        "greeting": "Here to play a game?"
+      },
+      {
+        "greeting": "Fancy meeting you here"
+      },
+      {
+        "greeting": "Good afternoon. This is a longer string to test how the wrapping is doing."
+      }
+    ]
+  }
