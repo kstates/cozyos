@@ -11,6 +11,7 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
 {
     public GameObject enterButton;
     public TMP_InputField userTextField;
+    public TMP_Dropdown userDropdown;
     public DataPersistenceManager dataPersistenceManager;
     private string userName;
 
@@ -63,9 +64,10 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     // Set up the scene based on the current profile and data
     private void setUpScene()
     {
-         if (this.userName.Length <= 0)
+        if (this.userName.Length <= 0)
         {
             this.enterButton.SetActive(false);
+            createUsersDropdown();
         }
 
     }
@@ -73,12 +75,15 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     // Create a dropdown with the profile and username that exist in our game data directory
     private void createUsersDropdown() 
     {
-       Dictionary<string, GameData> profilesGameData = dataPersistenceManager.GetAllProfilesGameData();
+        userDropdown.ClearOptions();
+
+        Dictionary<string, GameData> profilesGameData = dataPersistenceManager.GetAllProfilesGameData();
        
-       foreach (KeyValuePair<string, GameData> pair in profilesGameData) 
-       { 
-            Debug.Log(pair);
-       }
+        foreach (KeyValuePair<string, GameData> pair in profilesGameData) 
+        { 
+            GameData gameData = pair.Value; 
+            userDropdown.options.Add(new TMP_Dropdown.OptionData(gameData.getUserName()));
+        }
 
     }
 
