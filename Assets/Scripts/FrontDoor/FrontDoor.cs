@@ -11,9 +11,11 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
 {
     public GameObject welcomePanel;
     public TMP_Text welcomeText;
+    public TMP_Text errorText;
     public GameObject userSelectionPanel;
     public TMP_InputField userTextField;
     public TMP_Dropdown userDropdown;
+    public GameObject userDropdownButton;
     public DataPersistenceManager dataPersistenceManager;
     private string userName;
 
@@ -52,9 +54,36 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     // Create a new user profile if a new username is entered
     private void CreateUserProfile(string newUserName)
     {
-       dataPersistenceManager.ChangeSelectedProfileId(System.Guid.NewGuid().ToString());
-       this.userName = newUserName; 
-       this.setUpScene();
+        if (newUserName == "") {
+            this.errorText.text = "User name cannot be empty";
+            return; 
+        } 
+
+        if (!unUniqCheck(newUserName))
+        {
+            this.errorText.text = "User name must be unique";
+            return;
+        }
+
+        dataPersistenceManager.ChangeSelectedProfileId(System.Guid.NewGuid().ToString());
+        this.userName = newUserName; 
+        this.setUpScene();
+    }
+
+    // Returns true if a username is unique
+    private bool unUniqCheck(string newUserName) 
+    {
+        Dictionary<string, GameData> profilesGameData = dataPersistenceManager.GetAllProfilesGameData();
+       
+        foreach (KeyValuePair<string, GameData> pair in profilesGameData) 
+        { 
+            GameData gameData = pair.Value; 
+            if (gameData.getUserName() == newUserName) {
+                return false;
+            } 
+        } 
+
+        return true;
     }
 
     // Switch to an existing user profile if one is chosen from the dropdown
@@ -93,14 +122,22 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     // Create a dropdown with the profile and username that exist in our game data directory
     private void createUsersDropdown() 
     {
-        userDropdown.ClearOptions();
-
         Dictionary<string, GameData> profilesGameData = dataPersistenceManager.GetAllProfilesGameData();
-       
-        foreach (KeyValuePair<string, GameData> pair in profilesGameData) 
-        { 
-            GameData gameData = pair.Value; 
-            userDropdown.options.Add(new TMP_Dropdown.OptionData(gameData.getUserName()));
+
+        if (profilesGameData.Count <= 0)
+        {
+            userDropdown.gameObject.SetActive(false);
+            userDropdownButton.SetActive(false);
+        }
+        else 
+        {
+            userDropdown.ClearOptions();
+    
+            foreach (KeyValuePair<string, GameData> pair in profilesGameData) 
+            { 
+                GameData gameData = pair.Value; 
+                userDropdown.options.Add(new TMP_Dropdown.OptionData(gameData.getUserName()));
+            }
         }
 
     }
