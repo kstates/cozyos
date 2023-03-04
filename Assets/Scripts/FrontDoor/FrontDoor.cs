@@ -9,7 +9,9 @@ using TMPro;
  */
 public class FrontDoor : MonoBehaviour, IDataPersistence
 {
-    public GameObject enterButton;
+    public GameObject welcomePanel;
+    public TMP_Text welcomeText;
+    public GameObject userSelectionPanel;
     public TMP_InputField userTextField;
     public TMP_Dropdown userDropdown;
     public DataPersistenceManager dataPersistenceManager;
@@ -24,10 +26,10 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
                 this.CreateUserProfile(userTextField.text);
                 break;
             case "dropdown":
-                Debug.Log("Dropdown");
+                this.SelectUserProfile(userDropdown.options[userDropdown.value].text);
                 break;
             default:
-                Debug.Log("No input Type");
+                Debug.Log("Invalid input type");
                 return;
         }
     } 
@@ -52,13 +54,23 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     {
        dataPersistenceManager.ChangeSelectedProfileId(System.Guid.NewGuid().ToString());
        this.userName = newUserName; 
+       this.setUpScene();
     }
 
     // Switch to an existing user profile if one is chosen from the dropdown
-    private void SelectUserProfile(string userProfileId)
+    private void SelectUserProfile(string userName)
     {
-        // Todo - add functionality once dropdown exists
-        return;
+        Dictionary<string, GameData> profilesGameData = dataPersistenceManager.GetAllProfilesGameData();
+       
+        foreach (KeyValuePair<string, GameData> pair in profilesGameData) 
+        { 
+            GameData gameData = pair.Value; 
+            if (gameData.getUserName() == userName) {
+                dataPersistenceManager.ChangeSelectedProfileId(pair.Key);
+                this.userName = userName; 
+                break;
+            } 
+        } 
     }
 
     // Set up the scene based on the current profile and data
@@ -66,8 +78,14 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     {
         if (this.userName.Length <= 0)
         {
-            this.enterButton.SetActive(false);
+            this.welcomePanel.SetActive(false);
             createUsersDropdown();
+        } 
+        else 
+        {
+            this.welcomeText.text = "Welcome, " + this.userName;
+            this.welcomePanel.SetActive(true);
+            this.userSelectionPanel.SetActive(false);
         }
 
     }
