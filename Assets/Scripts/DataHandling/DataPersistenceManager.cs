@@ -21,7 +21,7 @@ public class DataPersistenceManager : MonoBehaviour
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
-    private SceneChanger sceneChanger;
+    public SceneChanger sceneChanger;
 
     private string selectedProfileId = "";
 
@@ -97,8 +97,7 @@ public class DataPersistenceManager : MonoBehaviour
             Debug.LogWarning("Overrode selected profile id with test id: " + testSelectedProfileId);
         }
         else if (this.selectedProfileId == null && !overrideSelectedProfileId){
-            this.sceneChanger = new SceneChanger();
-            sceneChanger.ChangeScene("FrontDoor");
+            this.sceneChanger.ChangeScene("FrontDoor");
         }
     }
 
@@ -119,10 +118,11 @@ public class DataPersistenceManager : MonoBehaviour
             NewGame();
         }
 
-        // if no data can be loaded, don't continue
+        // if no data can be loaded, go to front door 
         if (this.gameData == null) 
         {
             Debug.Log("No data was found. A New Game needs to be started before data can be loaded.");
+            this.sceneChanger.ChangeScene("FrontDoor");
             return;
         }
 
