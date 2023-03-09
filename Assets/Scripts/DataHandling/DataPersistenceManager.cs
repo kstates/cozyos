@@ -21,9 +21,8 @@ public class DataPersistenceManager : MonoBehaviour
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
-    public SceneChanger sceneChanger;
 
-    private string selectedProfileId = "";
+    private string selectedProfileId = null;
 
     private Coroutine autoSaveCoroutine;
 
@@ -96,8 +95,8 @@ public class DataPersistenceManager : MonoBehaviour
             this.selectedProfileId = testSelectedProfileId;
             Debug.LogWarning("Overrode selected profile id with test id: " + testSelectedProfileId);
         }
-        else if (this.selectedProfileId == null && !overrideSelectedProfileId){
-            this.sceneChanger.ChangeScene("FrontDoor");
+        else if (this.selectedProfileId == null && !overrideSelectedProfileId && SceneManager.GetActiveScene().name != "FrontDoor"){
+            SceneManager.LoadScene("FrontDoor");
         }
     }
 
@@ -118,11 +117,18 @@ public class DataPersistenceManager : MonoBehaviour
             NewGame();
         }
 
-        // if no data can be loaded, go to front door 
-        if (this.gameData == null) 
+        // if no data can be loaded, and we're not already at the front door, go to front door 
+        if (this.gameData == null && SceneManager.GetActiveScene().name != "FrontDoor")
+        {
+            Debug.Log("No data was found. We'll need to go to the front door to choose a user.");
+            SceneManager.LoadScene("FrontDoor");
+            return;
+        }
+
+        // If there is no game data and we *are* at the front door, don't try to load things further 
+        if (this.gameData == null && SceneManager.GetActiveScene().name == "FrontDoor") 
         {
             Debug.Log("No data was found. A New Game needs to be started before data can be loaded.");
-            this.sceneChanger.ChangeScene("FrontDoor");
             return;
         }
 

@@ -16,8 +16,12 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     public TMP_InputField userTextField;
     public TMP_Dropdown userDropdown;
     public GameObject userDropdownButton;
-    public DataPersistenceManager dataPersistenceManager;
     private string userName;
+
+    public void Start()
+    {
+       this.setUpScene(); 
+    }
 
     // Select or create a new user
     public void SelectUser(string inputType)
@@ -65,7 +69,9 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
             return;
         }
 
-        dataPersistenceManager.ChangeSelectedProfileId(System.Guid.NewGuid().ToString());
+
+        DataPersistenceManager.instance.NewGame();
+        DataPersistenceManager.instance.ChangeSelectedProfileId(System.Guid.NewGuid().ToString());
         this.userName = newUserName; 
         this.setUpScene();
     }
@@ -73,7 +79,7 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     // Returns true if a username is unique
     private bool unUniqCheck(string newUserName) 
     {
-        Dictionary<string, GameData> profilesGameData = dataPersistenceManager.GetAllProfilesGameData();
+        Dictionary<string, GameData> profilesGameData = DataPersistenceManager.instance.GetAllProfilesGameData();
        
         foreach (KeyValuePair<string, GameData> pair in profilesGameData) 
         { 
@@ -89,13 +95,13 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     // Switch to an existing user profile if one is chosen from the dropdown
     private void SelectUserProfile(string userName)
     {
-        Dictionary<string, GameData> profilesGameData = dataPersistenceManager.GetAllProfilesGameData();
+        Dictionary<string, GameData> profilesGameData = DataPersistenceManager.instance.GetAllProfilesGameData();
        
         foreach (KeyValuePair<string, GameData> pair in profilesGameData) 
         { 
             GameData gameData = pair.Value; 
             if (gameData.getUserName() == userName) {
-                dataPersistenceManager.ChangeSelectedProfileId(pair.Key);
+                DataPersistenceManager.instance.ChangeSelectedProfileId(pair.Key);
                 this.userName = userName; 
                 break;
             } 
@@ -105,7 +111,7 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     // Set up the scene based on the current profile and data
     private void setUpScene()
     {
-        if (this.userName.Length <= 0)
+        if (this.userName == null || this.userName.Length <= 0)
         {
             this.welcomePanel.SetActive(false);
             createUsersDropdown();
@@ -122,7 +128,7 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     // Create a dropdown with the profile and username that exist in our game data directory
     private void createUsersDropdown() 
     {
-        Dictionary<string, GameData> profilesGameData = dataPersistenceManager.GetAllProfilesGameData();
+        Dictionary<string, GameData> profilesGameData = DataPersistenceManager.instance.GetAllProfilesGameData();
 
         if (profilesGameData.Count <= 0)
         {

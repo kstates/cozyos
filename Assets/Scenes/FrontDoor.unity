@@ -832,7 +832,6 @@ MonoBehaviour:
   userTextField: {fileID: 62420301}
   userDropdown: {fileID: 112917512}
   userDropdownButton: {fileID: 1181442877}
-  dataPersistenceManager: {fileID: 2080675323}
 --- !u!4 &550256464
 Transform:
   m_ObjectHideFlags: 0
@@ -1170,7 +1169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a1e6bdd643b584e944074bb8212080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataPersistenceManager: {fileID: 2080675323}
 --- !u!4 &952576553
 Transform:
   m_ObjectHideFlags: 0
@@ -3618,13 +3616,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d70b1805de27f42b9c02bd928c231f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initializeDataIfNull: 1
+  initializeDataIfNull: 0
   overrideSelectedProfileId: 0
   testSelectedProfileId: test
   fileName: data.game
   useEncryption: 0
   autoSaveTimeSeconds: 60
-  sceneChanger: {fileID: 952576552}
 --- !u!1 &2134949012
 GameObject:
   m_ObjectHideFlags: 0
