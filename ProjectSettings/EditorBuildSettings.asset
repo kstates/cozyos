@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LivingRoom.unity
     guid: 0eedd2ea09c68904d835e6eb39b41c38
+  - enabled: 1
+    path: Assets/Scenes/GeoSafariIndex.unity
+    guid: 0b2bda835d2d1da4b84a6db7da30e5aa
   m_configObjects: {}
