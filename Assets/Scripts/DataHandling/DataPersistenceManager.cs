@@ -67,6 +67,14 @@ public class DataPersistenceManager : MonoBehaviour
         autoSaveCoroutine = StartCoroutine(AutoSave());
     }
 
+    // Create a new profile
+    public void CreateNewProfile(string newProfileId)
+    {
+       NewGame();
+       this.selectedProfileId = newProfileId;
+       SaveGame(); 
+    }
+
     public void ChangeSelectedProfileId(string newProfileId) 
     {
         // update the profile to use for saving and loading
@@ -107,7 +115,6 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void LoadGame()
     {
-
         // load any saved data from a file using the data handler
         this.gameData = dataHandler.Load(selectedProfileId);
 

@@ -55,6 +55,9 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
         data.setUserName(this.userName);
     }
 
+    // Stub that needs to be implemented for IDataPersistence
+    public void NewGame(){}
+
     // Create a new user profile if a new username is entered
     private void CreateUserProfile(string newUserName)
     {
@@ -69,10 +72,8 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
             return;
         }
 
-
-        DataPersistenceManager.instance.NewGame();
-        DataPersistenceManager.instance.ChangeSelectedProfileId(System.Guid.NewGuid().ToString());
         this.userName = newUserName; 
+        DataPersistenceManager.instance.CreateNewProfile(System.Guid.NewGuid().ToString());
         this.setUpScene();
     }
 
