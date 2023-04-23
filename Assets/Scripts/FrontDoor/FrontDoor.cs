@@ -143,7 +143,7 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
         else 
         {
             userDropdown.ClearOptions();
-            userDropdown.captionText.text = "Choose an existing user"; 
+            userDropdown.captionText.text = "Choose a user"; 
     
             foreach (KeyValuePair<string, GameData> pair in profilesGameData) 
             { 
