@@ -95,6 +95,7 @@ public class DataPersistenceManager : MonoBehaviour
 
 
     // If there is no selected profile, brings you to the Front Door to select a user / profile
+    // TODO: consider renaming this, I don't think this is quite the functionality that this still has
     private void InitializeSelectedProfileId() 
     { 
         

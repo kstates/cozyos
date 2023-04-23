@@ -21,6 +21,10 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     public void Start()
     {
        this.setUpScene(); 
+
+        userDropdown.onValueChanged.AddListener(delegate {
+            userDropdownValueChanged();
+        });
     }
 
     // Select or create a new user
@@ -130,15 +134,16 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
     private void createUsersDropdown() 
     {
         Dictionary<string, GameData> profilesGameData = DataPersistenceManager.instance.GetAllProfilesGameData();
+        userDropdownButton.SetActive(false); // We only set this to true once a user makes a selection
 
         if (profilesGameData.Count <= 0)
         {
             userDropdown.gameObject.SetActive(false);
-            userDropdownButton.SetActive(false);
         }
         else 
         {
             userDropdown.ClearOptions();
+            userDropdown.captionText.text = "Choose an existing user"; 
     
             foreach (KeyValuePair<string, GameData> pair in profilesGameData) 
             { 
@@ -147,6 +152,13 @@ public class FrontDoor : MonoBehaviour, IDataPersistence
             }
         }
 
+    }
+
+    // If a user is selected, reveal the user selection button. We don't need to check for values, any
+    // change will make this different
+    private void userDropdownValueChanged()
+    {
+        userDropdownButton.SetActive(true); 
     }
 
 }
