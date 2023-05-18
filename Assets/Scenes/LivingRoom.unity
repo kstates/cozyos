@@ -530,7 +530,7 @@ PrefabInstance:
     - target: {fileID: 3409234986540499418, guid: 1dd6b074426ba424889416596a113d1f,
         type: 3}
       propertyPath: destinationScene
-      value: GeoSafariIndex
+      value: GeoSafariIntro
       objectReference: {fileID: 0}
     - target: {fileID: 3409234986540499418, guid: 1dd6b074426ba424889416596a113d1f,
         type: 3}
