@@ -962,10 +962,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1667801171}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec4412025e26f8a4a803021e8b41bfe8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9573c079d2715b44294d1b1933fd3e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   randomGreetingsFile: {fileID: 4900000, guid: c6dc9903624b8144e8caef4e22bc7f7d, type: 3}
+  enterGameButton: {fileID: 1818184373}
 --- !u!4 &1667801173
 Transform:
   m_ObjectHideFlags: 0

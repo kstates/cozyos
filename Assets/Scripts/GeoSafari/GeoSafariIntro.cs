@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GeoSafari : MonoBehaviour
+public class GeoSafariIntro : MonoBehaviour
 {
     public TextAsset randomGreetingsFile; 
     public Button enterGameButton;

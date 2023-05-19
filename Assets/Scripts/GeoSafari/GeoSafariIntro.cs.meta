@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: ec4412025e26f8a4a803021e8b41bfe8
+guid: 9573c079d2715b44294d1b1933fd3e92
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - randomGreetingsFile: {fileID: 4900000, guid: c6dc9903624b8144e8caef4e22bc7f7d,
-      type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
