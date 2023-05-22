@@ -12,7 +12,10 @@ public class GeoSafariIntro : MonoBehaviour
     private int greetingsLen;
     private SceneChanger sceneChanger;
 
-    // Start is called before the first frame update
+    /**
+     * Set up the capybara game intro scene, which mostly consists of a random greeting and an invitation to enter the game. 
+     * TODO: I might end up moving the game selection from the geosafarigame scene to this scene
+     */
     void Start()
     {
         sceneChanger = gameObject.AddComponent<SceneChanger>();
@@ -29,6 +32,9 @@ public class GeoSafariIntro : MonoBehaviour
         
     }
 
+    /**
+     * Enters the geosafarigame scene, which handles the bulk of the actual geosafari game
+     */ 
     private void EnterGame()
     {
         sceneChanger.ChangeScene("GeoSafariGame");
