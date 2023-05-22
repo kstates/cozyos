@@ -6,6 +6,8 @@ using TMPro;
 
 public class GeoSafariGame : MonoBehaviour
 {
+    public TMP_Dropdown questionDropdown;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,11 +31,17 @@ public class GeoSafariGame : MonoBehaviour
 
     private void createQuestionDropdown() 
     {
+        questionDropdown.ClearOptions();
+        questionDropdown.captionText.text = "Choose a game";
+        
         FileInfo[] questions = getAllQuestions(); 
         foreach (var questionSetPath in questions)
         {
             string jsonTextFile = File.ReadAllText(questionSetPath.FullName);
             Questions questionJSON = JsonUtility.FromJson<Questions>(jsonTextFile); 
+
+            questionDropdown.options.Add(new TMP_Dropdown.OptionData(questionJSON.questionSetTitle));
         }
+
     }
 }
