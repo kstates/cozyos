@@ -26,16 +26,13 @@ public class GeoSafariIntro : MonoBehaviour
         float randomGreeting = Random.Range(0, greetingsLen);
     
         GetComponentInChildren<TextMeshProUGUI>().text = greetings.greetings[(int)randomGreeting].greeting;
-        enterGameButton = GetComponentInChildren<Button>();
 
-        enterGameButton.onClick.AddListener(EnterGame);
-        
     }
 
     /**
      * Enters the geosafarigame scene, which handles the bulk of the actual geosafari game
      */ 
-    private void EnterGame()
+    private void LaunchGame()
     {
         sceneChanger.ChangeScene("GeoSafariGame");
     } 

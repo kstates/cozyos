@@ -4,15 +4,21 @@
     [
       {
         "questionTitle": "John",
-        "questionBody": "Doe"
+        "questionBody": "Doe",
+        "questionAnswers": ["Test Answer one", "Test answer two", "test answer three"],
+        "questionCorrectAnswer": 1
       },
       {
         "questionTitle": "Anna",
-        "questionBody": "Smith"
+        "questionBody": "Smith",
+        "questionAnswers": ["Test Answer one", "Test answer two", "test answer three"],
+        "questionCorrectAnswer": 0
       },
       {
         "questionTitle": "Peter",
-        "questionBody": "Jones"
+        "questionBody": "Jones",
+        "questionAnswers": ["Test Answer one", "Test answer two", "test answer three"],
+        "questionCorrectAnswer": 2
       }
     ]
   }
